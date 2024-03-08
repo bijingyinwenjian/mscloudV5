@@ -1,0 +1,20 @@
+# ==========applicationName + druid-mysql8 driver===================
+spring:
+  application:
+    name: cloud-payment-service
+  ####Spring Cloud Consul for Service Discovery
+  cloud:
+    consul:
+      host: 111.230.204.58
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        register-health-check: false
+      config:
+        format: yaml
+        profile-separator: "-"
+        # 配置热更新 监听间隔
+#        watch:
+#          wait-time: 3
+
+

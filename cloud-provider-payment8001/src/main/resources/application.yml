@@ -1,14 +1,10 @@
 server:
   port: 8001
-
-# ==========applicationName + druid-mysql8 driver===================
 spring:
-  application:
-    name: cloud-payment-service
   jackson:
     date-format: yyyy-MM-dd hh:mm:ss
     time-zone: GMT+8
-
+# ==========applicationName + druid-mysql8 driver===================
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -16,6 +12,9 @@ spring:
     username: root
 #    password: 1111
     password: Abc123,./
+  ####Spring Cloud Consul for Service Discovery
+  profiles:
+    active: dev
 
 # ========================mybatis===================
 mybatis:
@@ -23,3 +22,5 @@ mybatis:
   type-aliases-package: com.atguigu.cloud.entities
   configuration:
     map-underscore-to-camel-case: true
+
+
