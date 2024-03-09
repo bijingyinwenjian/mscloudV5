@@ -11,7 +11,8 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class OrderController {
 
-    public static final String PaymentSrv_URL = "http://localhost:8001";
+//    public static final String PaymentSrv_URL = "http://localhost:8001";
+    public static final String PaymentSrv_URL = "http://cloud-payment-service";
 
     @Resource
     private RestTemplate restTemplate;
@@ -36,5 +37,11 @@ public class OrderController {
     public ResultData deleteOrder(@PathVariable("id") Integer id) {
         restTemplate.delete(PaymentSrv_URL + "/pay/del/" + id, id, ResultData.class);
         return ResultData.success(null);
+    }
+
+    @GetMapping(value = "/consumer/pay/get/info")
+    private String getInfoByConsul()
+    {
+        return restTemplate.getForObject(PaymentSrv_URL + "/pay/get/info", String.class);
     }
 }
