@@ -23,7 +23,9 @@ public class PayController {
 
     @PostMapping("/pay/add")
     @Operation(summary = "新增接口")
-    public ResultData<String> addPay(@RequestBody Pay pay) {
+    public ResultData<String> addPay(@RequestBody PayDTO payDTO) {
+        Pay pay = new Pay();
+        BeanUtils.copyProperties(payDTO,pay);
         int add = payService.add(pay);
         return ResultData.success("成功插入记录,返回值：" + add);
     }
@@ -42,9 +44,11 @@ public class PayController {
     }
 
     @GetMapping("/pay/get/{id}")
-    public ResultData<Pay> getById(@PathVariable("id") Integer id) {
+    public ResultData<PayDTO> getById(@PathVariable("id") Integer id) {
         Pay pay = payService.getById(id);
-        return ResultData.success(pay);
+        PayDTO payDTO = new PayDTO();
+        BeanUtils.copyProperties(pay,payDTO);
+        return ResultData.success(payDTO);
     }
 
     @GetMapping("/pay/getAll")
