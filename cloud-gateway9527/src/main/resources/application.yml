@@ -1,0 +1,34 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: cloud-gateway #以微服务注册进consul或nacos服务列表内
+  cloud:
+    consul: #配置consul地址
+      host: 111.230.204.58
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+        service-name: ${spring.application.name}
+        register-health-check: false
+    gateway:
+      routes:
+        - id: pay_routh1 #pay_routh1                #路由的ID(类似mysql主键ID)，没有固定规则但要求唯一，建议配合服务名
+          uri: lb://cloud-payment-service                #匹配后提供服务的路由地址
+          predicates:
+            - Path=/pay/gateway/get/**              # 断言，路径相匹配的进行路由
+            - Before=2025-11-20T17:38:13.586918800+08:00[Asia/Shanghai]
+            - After=2023-11-20T17:38:13.586918800+08:00[Asia/Shanghai]
+            - Cookie=name,ywj
+            - Header=X-Request-Id, \d+
+#            - Host=127.0.0.1
+            - Query=name,123
+#            - RemoteAddr=
+            - Method=GET
+#            - My=diamond
+        - id: pay_routh2 #pay_routh2                #路由的ID(类似mysql主键ID)，没有固定规则但要求唯一，建议配合服务名
+          uri: lb://cloud-consumer-feign-order                #匹配后提供服务的路由地址
+          predicates:
+            - Path=/feign/pay/**             # 断言，路径相匹配的进行路由
+            - Between=2023-11-20T17:38:13.586918800+08:00[Asia/Shanghai],2024-11-20T17:38:13.586918800+08:00[Asia/Shanghai]

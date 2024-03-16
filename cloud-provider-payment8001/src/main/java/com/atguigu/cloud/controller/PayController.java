@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @RestController
@@ -45,6 +46,12 @@ public class PayController {
 
     @GetMapping("/pay/get/{id}")
     public ResultData<PayDTO> getById(@PathVariable("id") Integer id) {
+        if (id == -4) throw new RuntimeException("id不能为负数");
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Pay pay = payService.getById(id);
         PayDTO payDTO = new PayDTO();
         BeanUtils.copyProperties(pay,payDTO);
