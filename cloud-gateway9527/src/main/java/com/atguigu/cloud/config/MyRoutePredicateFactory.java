@@ -1,4 +1,4 @@
-package com.atguigu.config;
+package com.atguigu.cloud.config;
 
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.cloud.gateway.handler.predicate.AbstractRoutePredicateFactory;
@@ -62,4 +62,3 @@ public class MyRoutePredicateFactory extends AbstractRoutePredicateFactory<MyRou
 
 
 }
- 
