@@ -1,0 +1,2 @@
+service-url:
+  nacos-user-service: http://nacos-payment-provider
