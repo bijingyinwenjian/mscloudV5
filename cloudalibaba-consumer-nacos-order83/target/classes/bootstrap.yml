@@ -9,4 +9,7 @@ spring:
         server-addr: 111.230.204.58:8848
       config:
         server-addr: 111.230.204.58:8848
-
+# 激活Sentinel对Feign的支持
+feign:
+  sentinel:
+    enabled: true
