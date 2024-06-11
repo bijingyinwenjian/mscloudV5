@@ -26,7 +26,7 @@ spring:
             - Query=name,123
 #            - RemoteAddr=
             - Method=GET
-            - My=diamond
+#            - My=diamond
         - id: pay_routh2 #pay_routh2                #路由的ID(类似mysql主键ID)，没有固定规则但要求唯一，建议配合服务名
           uri: lb://cloud-consumer-feign-order                #匹配后提供服务的路由地址
           predicates:
